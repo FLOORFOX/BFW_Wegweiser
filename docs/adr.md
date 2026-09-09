@@ -48,14 +48,14 @@ Rejected alternatives:
 
 ## 2. Usage and feedback analytics deferred and decoupled from routing
 
-**Status:** Accepted
+Status: Accepted
 
-**Context:** While usage insights (popular destinations, points where users get
+Context: While usage insights (popular destinations, points where users get
 confused) will help improve signage and instructions, routing is strictly a
 read-only static delivery path. Analytics is fundamentally a write path
 (client → collector) that cannot reuse static JSON distribution.
 
-**Decision:** Defer analytics infrastructure during early development. When
+Decision: Defer analytics infrastructure during early development. When
 implemented, keep analytics completely decoupled from routing:
 
 - Kiosk phase: local, append-only log files with zero external infrastructure.
@@ -64,10 +64,35 @@ implemented, keep analytics completely decoupled from routing:
 - Privacy by design: never collect or store data traceable to individual users;
   formalize a clear privacy policy before activating any data collection.
 
-**Consequences:**
+Consequences:
 
 - No premature infrastructure or telemetry code built during prototype stages.
 - Routing remains completely static, self-contained, and performant regardless of
   analytics decisions.
 - Privacy and compliance constraints are established deliberately upfront rather
   than retrofitted.
+
+## 3. Lightweight testing: contract verification and algorithm checks
+
+Status: Accepted
+
+Context: The Python compiler exports static data consumed by a browser viewer.
+Testing needs to prevent cross-tier breakage without adding heavy tooling or
+slowing prototyping.
+
+Decision: Adopt a minimal, contract-focused test suite:
+
+- Prioritize the contract: Verify `compile_routing_data()` structure, coordinate
+  formats, and path coverage (`RoutingContractTests`) to catch frontend-breaking
+  schema changes in Python before browser rendering.
+- Isolate algorithm tests: Keep graph traversal checks (`PathfindingAlgorithmTests`)
+  separate so routing algorithms can change without rewriting export assertions.
+- Co-locate in `src/`: Retain tests in `src/test_main.py` under standard unittest
+  discovery, deferring a root `tests/` directory until test count warrants it.
+- Defer JS tests: Avoid Node.js or npm dependencies while `web/` remains an
+  algorithm-free static viewer.
+
+Consequences:
+
+- Schema regressions between compiler and viewer are caught immediately.
+- Zero external testing dependencies or build tools required.

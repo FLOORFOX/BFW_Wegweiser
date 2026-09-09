@@ -5,6 +5,28 @@ messages with slightly more context. Each entry is headed by timestamp and
 contributor initials. Entries don't map 1:1 to commits. Ordered most recent
 first. Covers changes made after forking; upstream history predates this log.
 
+## 2026-09-09 14:10 - DM
+
+Restructured [src/test_main.py](src/test_main.py) into two distinct test
+classes and established a minimal testing policy in [docs/adr.md](docs/adr.md).
+
+To catch cross-tier data breakages without slowing prototyping, testing is
+structured into two classes sharing module fixtures via `setUpClass`:
+
+- `RoutingContractTests`: Validates the interface between the compiler and the
+  viewer. Checks presence of top-level keys (`start`, `points`, `destinations`,
+  `routes`), ensures coordinates are numeric pairs, and confirms every declared
+  destination has a valid non-empty route starting at `startpunkt` and ending at
+  the destination.
+- `PathfindingAlgorithmTests`: Isolates route traversal checks for
+  `build_graph()` and `find_path()`, keeping graph logic verified independently
+  from export formatting.
+
+Tests remain co-located in [src/test_main.py](src/test_main.py) using standard
+unittest discovery (`python -m unittest discover -s src`). JavaScript tests
+and a dedicated root `tests/` directory are deferred to keep dependencies at zero
+while the viewer contains no routing logic.
+
 ## 2026-09-09 11:35 - DM
 
 Synchronized multi-machine development by integrating the architectural
