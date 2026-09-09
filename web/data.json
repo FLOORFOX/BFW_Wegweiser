@@ -1,0 +1,131 @@
+{
+  "start": "startpunkt",
+  "points": {
+    "startpunkt": [
+      675,
+      400
+    ],
+    "knoten_1": [
+      680,
+      318
+    ],
+    "knoten_2": [
+      556,
+      314
+    ],
+    "knoten_3": [
+      488,
+      354
+    ],
+    "knoten_4": [
+      327,
+      349
+    ],
+    "knoten_nord": [
+      624,
+      185
+    ],
+    "ost_1": [
+      769,
+      330
+    ],
+    "ost_2": [
+      880,
+      340
+    ],
+    "nord_1": [
+      511,
+      185
+    ],
+    "nord_2": [
+      777,
+      176
+    ],
+    "nord_west_1": [
+      163,
+      82
+    ],
+    "west_1": [
+      165,
+      349
+    ],
+    "west_2": [
+      96,
+      348
+    ],
+    "sued_west": [
+      255,
+      485
+    ]
+  },
+  "destinations": [
+    "nord_1",
+    "nord_2",
+    "nord_west_1",
+    "ost_1",
+    "ost_2",
+    "sued_west",
+    "west_1",
+    "west_2"
+  ],
+  "routes": {
+    "nord_1": [
+      "startpunkt",
+      "knoten_1",
+      "knoten_2",
+      "knoten_nord",
+      "nord_1"
+    ],
+    "nord_2": [
+      "startpunkt",
+      "knoten_1",
+      "knoten_2",
+      "knoten_nord",
+      "nord_2"
+    ],
+    "nord_west_1": [
+      "startpunkt",
+      "knoten_1",
+      "knoten_2",
+      "knoten_3",
+      "knoten_4",
+      "nord_west_1"
+    ],
+    "ost_1": [
+      "startpunkt",
+      "knoten_1",
+      "ost_1"
+    ],
+    "ost_2": [
+      "startpunkt",
+      "knoten_1",
+      "ost_1",
+      "ost_2"
+    ],
+    "sued_west": [
+      "startpunkt",
+      "knoten_1",
+      "knoten_2",
+      "knoten_3",
+      "knoten_4",
+      "sued_west"
+    ],
+    "west_1": [
+      "startpunkt",
+      "knoten_1",
+      "knoten_2",
+      "knoten_3",
+      "knoten_4",
+      "west_1"
+    ],
+    "west_2": [
+      "startpunkt",
+      "knoten_1",
+      "knoten_2",
+      "knoten_3",
+      "knoten_4",
+      "west_1",
+      "west_2"
+    ]
+  }
+}

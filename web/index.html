@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BFW Wegweiser</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="data.js" defer></script>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <main class="app-shell">
+        <div class="content-layout">
+            <section class="map-panel" aria-labelledby="map-title">
+                <div class="section-heading">
+                    <div>
+                        <h1 id="map-title">Finde deinen Weg</h1>
+                    </div>
+                    <span class="map-status">Startpunkt markiert</span>
+                </div>
+                <div class="map-frame">
+                    <img src="assets/Grundriss_mit_Knotenpunkten.png" alt="Grundriss des BFW mit markierten Knotenpunkten">
+                    <svg id="route-overlay" class="route-overlay" viewBox="0 0 960 680" aria-hidden="true">
+                        <polyline id="route-line" points=""></polyline>
+                        <g id="route-points"></g>
+                    </svg>
+                </div>
+            </section>
+
+            <section class="destination-panel" aria-labelledby="destination-title">
+                <h2 id="destination-title">Wohin möchtest du?</h2>
+                <form id="destination-form">
+                    <label for="destination">Ziel eingeben</label>
+                    <div class="input-row">
+                        <div class="input-field">
+                            <input
+                                id="destination"
+                                name="destination"
+                                type="text"
+                                placeholder="z. B. nord_1"
+                                autocomplete="off"
+                                aria-autocomplete="list"
+                                aria-controls="destination-options"
+                                aria-expanded="false"
+                                required
+                            >
+                            <ul id="destination-options" class="suggestions" role="listbox"></ul>
+                        </div>
+                        <button type="submit">Weg anzeigen</button>
+                    </div>
+                    <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+                </form>
+            </section>
+        </div>
+    </main>
+</body>
+</html>
