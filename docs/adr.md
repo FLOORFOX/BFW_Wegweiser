@@ -13,6 +13,7 @@ clean division of responsibilities and a standard workspace layout that works
 out of the box across environments.
 
 **Decision:** Adopt a decoupled two-tier architecture:
+
 - `src/`: Python serves as an offline build tool and graph compiler. It defines
   coordinates, edge weights, and pathfinding rules, precomputing routes and
   exporting static artifacts (`web/data.json` and companion `web/data.js`).
@@ -25,6 +26,7 @@ compatibility with linters, test runners, and static file servers without custom
 path configuration.
 
 Rejected alternatives:
+
 - *Live backend API:* Premature infrastructure and hosting costs; introduces
   runtime network failure modes into offline kiosks.
 - *Duplicating pathfinding algorithms in JS:* Causes logic drift and requires
@@ -35,6 +37,7 @@ Rejected alternatives:
   than architectural responsibility.
 
 **Consequences:**
+
 - Zero hosting cost; static files run locally in kiosks (including direct `file://`
   viewing) and can be hosted statically for phones without backend infrastructure.
 - Single source of truth for routing algorithms and building data in Python.
@@ -54,6 +57,7 @@ read-only static delivery path. Analytics is fundamentally a write path
 
 **Decision:** Defer analytics infrastructure during early development. When
 implemented, keep analytics completely decoupled from routing:
+
 - Kiosk phase: local, append-only log files with zero external infrastructure.
 - Mobile/hosted phase: a minimal event-collection endpoint or a third-party
   privacy-focused service.
@@ -61,6 +65,7 @@ implemented, keep analytics completely decoupled from routing:
   formalize a clear privacy policy before activating any data collection.
 
 **Consequences:**
+
 - No premature infrastructure or telemetry code built during prototype stages.
 - Routing remains completely static, self-contained, and performant regardless of
   analytics decisions.
