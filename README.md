@@ -45,7 +45,12 @@ wegweiser/
 ├── README.md
 ├── docs/
 │   ├── adr.md
+│   ├── axioms.md
+│   ├── convergences.md
+│   ├── design_recap.md
 │   ├── devlog.md
+│   ├── glossary.md
+│   ├── graphic_strategy.md
 │   └── roadmap.md
 ├── src/
 │   ├── main.py
@@ -60,13 +65,24 @@ wegweiser/
     └── style.css
 ```
 
+## Conceptual Model
+
+Routing operates on a dual graph: **portals** are nodes, **zone** crossings are
+edges. A zone is a space, a portal is a boundary between exactly two zones, and
+nothing else exists. The model is fixed by [docs/axioms.md](docs/axioms.md) and
+[docs/glossary.md](docs/glossary.md); floor plans are authored as semantic SVG
+per [docs/graphic_strategy.md](docs/graphic_strategy.md).
+
 ## Roadmap
 
 - [x] Two-tier architecture (offline Python compiler & static web visualizer)
-- [ ] Phase 1: Dijkstra baseline with Euclidean pixel distance weighting
-- [ ] Phase 2: Walking cost penalties (turns, doors) & multi-floor transitions
-- [ ] Phase 3: Facility-wide graph expansion (~200–300 rooms)
-- [ ] Phase 4: Precomputed next-hop decision tables & human instruction generation
+- [ ] Phase 1: Floor plan preprocessing & asset contract
+- [ ] Phase 2: Topology extraction & compiler decoupling
+- [ ] Phase 3: Algorithm selection & routing engine
+- [ ] Phase 4: Cost model & movement geometry
+- [ ] Phase 5: Facility-wide coverage & destination partitioning (~200–300 zones)
+- [ ] Phase 6: Multi-floor movement & accessibility
+- [ ] Phase 7: Precomputation & human guidance
 
 Phases map 1:1 to GitHub Milestones (macro view); technical bullet points in [docs/roadmap.md](docs/roadmap.md) map to actionable GitHub Issues (micro view).
 
