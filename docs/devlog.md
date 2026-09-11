@@ -5,6 +5,23 @@ messages with slightly more context. Each entry is headed by timestamp and
 contributor initials. Entries don't map 1:1 to commits. Ordered most recent
 first. Covers changes made after forking; upstream history predates this log.
 
+## 2026-09-11 10:45 - DM
+
+Documented project roadmap checklist and established trunk-based development
+workflow conventions for contributor collaboration.
+
+In [README.md](README.md), added a distilled high-level roadmap checklist
+mapping the project's four active development phases, and documented workflow
+guidelines: routine changes commit directly to `main`, while multi-commit or
+disruptive refactors use short-lived task branches rebased and fast-forward
+merged onto `main` to preserve a clean, linear commit history.
+
+In [docs/roadmap.md](docs/roadmap.md), added an Execution & Tracking section
+formalizing the project tracking model: macro-level phases in [README.md](README.md)
+map 1:1 to container GitHub Milestones, while detailed technical bullet points
+in [docs/roadmap.md](docs/roadmap.md) serve directly as actionable micro GitHub
+Issues assigned to individual contributors.
+
 ## 2026-09-09 14:10 - DM
 
 Restructured [src/test_main.py](src/test_main.py) into two distinct test

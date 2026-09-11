@@ -45,7 +45,8 @@ wegweiser/
 ├── README.md
 ├── docs/
 │   ├── adr.md
-│   └── devlog.md
+│   ├── devlog.md
+│   └── roadmap.md
 ├── src/
 │   ├── main.py
 │   └── test_main.py
@@ -58,3 +59,31 @@ wegweiser/
     ├── script.js
     └── style.css
 ```
+
+## Roadmap
+
+- [x] Two-tier architecture (offline Python compiler & static web visualizer)
+- [ ] Phase 1: Dijkstra baseline with Euclidean pixel distance weighting
+- [ ] Phase 2: Walking cost penalties (turns, doors) & multi-floor transitions
+- [ ] Phase 3: Facility-wide graph expansion (~200–300 rooms)
+- [ ] Phase 4: Precomputed next-hop decision tables & human instruction generation
+
+Phases map 1:1 to GitHub Milestones (macro view); technical bullet points in [docs/roadmap.md](docs/roadmap.md) map to actionable GitHub Issues (micro view).
+
+## Development Workflow
+
+Trunk-based workflow on `main` with linear history:
+
+- **Routine changes**: Pull latest `main`, verify tests pass, commit and push directly.
+- **Multi-commit / breaking refactors**: Work on a short-lived branch, rebase, and fast-forward merge:
+
+  ```powershell
+  git switch -c feature/name
+  # ... work & commit ...
+  git fetch origin; git rebase origin/main
+  git switch main; git merge --ff-only feature/name
+  git push origin main; git branch -d feature/name
+  ```
+
+- **Task tracking**: Macro phases map to GitHub Milestones; technical bullet points in [docs/roadmap.md](docs/roadmap.md) map to GitHub Issues.
+- **Rule**: Code on `main` must pass all tests at all times (`python -m unittest discover -s src`).

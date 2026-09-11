@@ -2,6 +2,13 @@
 
 State: 2026-09-10
 
+## Execution & Tracking
+
+To coordinate implementation between contributors without documentation drift or Git conflicts:
+
+- **Macro View (GitHub Milestones)**: Each major phase corresponds 1:1 to a container GitHub Milestone, tracked as high-level checkboxes in [README.md](README.md).
+- **Micro View (GitHub Issues)**: Specific technical bullet points under each phase serve directly as actionable GitHub Issues assigned to individual contributors.
+
 ## Overview
 
 The facility layout is characterized primarily by a star topology radiating from central junctions (such as Empfang and `knoten_4`), with cycle structures concentrated in the eastern section. Because full build-out is relatively compact (~200–300 nodes), runtime latency is practically negligible (<1 ms across candidate algorithms). Strategic focus centers on accurate walking cost models, human-oriented instruction clarity, robust handling of loops and deviation, and maintaining clean architectural boundaries between data compilation and static presentation.
