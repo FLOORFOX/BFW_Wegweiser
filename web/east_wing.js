@@ -21,6 +21,14 @@ const stateChain = document.querySelector("#state-chain");
 
 let database = null;
 
+function clearRenderedRoute() {
+    routeSegments.replaceChildren();
+    routeMarkers.replaceChildren();
+    floorPlan.querySelectorAll(".route-zone, .start-zone, .target-zone").forEach((zone) => {
+        zone.classList.remove("route-zone", "start-zone", "target-zone");
+    });
+}
+
 function zoneLabel(zoneId) {
     const zone = database.zones[zoneId];
     return zone.label === zoneId ? zoneId : `${zoneId} · ${zone.label}`;
@@ -60,6 +68,7 @@ async function loadPrototype() {
     } catch (error) {
         modelStatus.textContent = "Prototypdaten konnten nicht geladen werden";
         modelStatus.setAttribute("data-error", "true");
+        emptyState.hidden = false;
         emptyState.textContent = "Die Seite muss über den lokalen Projektserver geöffnet werden.";
         console.error("East-wing prototype failed to load:", error);
     }
@@ -72,11 +81,7 @@ function orientedGeometry(segment, fromPortalId) {
 }
 
 function drawRoute(route, startZone, targetZone) {
-    routeSegments.replaceChildren();
-    routeMarkers.replaceChildren();
-    floorPlan.querySelectorAll(".route-zone, .start-zone, .target-zone").forEach((zone) => {
-        zone.classList.remove("route-zone", "start-zone", "target-zone");
-    });
+    clearRenderedRoute();
 
     for (const zoneId of route.zone_sequence) {
         floorPlan.querySelector(`#zone-${CSS.escape(zoneId)}`)?.classList.add("route-zone");
@@ -174,6 +179,7 @@ function renderSelectedRoute() {
     const targetZone = targetSelect.value;
     const route = database.routes[startZone]?.[targetZone];
     if (!route || route.status !== "ok") {
+        clearRenderedRoute();
         emptyState.hidden = false;
         emptyState.textContent = "Für dieses Zonenpaar wurde keine Route gefunden.";
         instructionList.replaceChildren();
