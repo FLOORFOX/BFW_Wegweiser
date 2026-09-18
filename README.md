@@ -10,7 +10,7 @@ The repository adopts a two-tier architecture separating data preparation from p
 - [web/](web/): Static client displaying the floor plan and rendering route overlays in the browser.
 
 active app:
-https://floorfox.github.io/BFW_Wegweiser/web/east_wing.html
+- [web/east_wing.html](web/east_wing.html)
 
 ## Requirements
 
