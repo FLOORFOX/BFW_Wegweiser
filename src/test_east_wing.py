@@ -1,3 +1,4 @@
+import copy
 import importlib.util
 import pathlib
 import unittest
@@ -45,6 +46,19 @@ class EastWingDatabaseTests(unittest.TestCase):
         self.assertEqual(route["sequence"], ["E.61"])
         self.assertEqual(route["portal_chain"], [])
         self.assertEqual(route["total_cost"], 0.0)
+
+    def test_validate_source_rejects_unrelated_wall_portal(self):
+        walls = copy.deepcopy(self.database["graphs"]["adjacency"]["edges"])
+        walls["w01"]["portal_id"] = "p22"
+
+        with self.assertRaisesRegex(ValueError, "portal does not match wall rooms"):
+            self.build_database.validate_source(
+                self.database["rooms"],
+                self.database["zones"],
+                self.database["portals"],
+                walls,
+                self.database["indexes"]["zone_portals"],
+            )
 
 
 if __name__ == "__main__":

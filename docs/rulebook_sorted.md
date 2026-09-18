@@ -10,13 +10,13 @@ The building is represented on its floor plan. Height is discarded, so every ele
 
 ### 1.2
 
-A zone is a two-dimensional space, created via zoning process by converting enclosed spaces, such as rooms, halls and corridors, into areas in which every portal is reachable from every other without obstruction. Zones partition the plan. Every point of the building belongs to exactly one zone, without gaps or overlaps. Every zone has at least one portal.
+A zone is a two-dimensional space, created via the zoning process by converting enclosed spaces, such as rooms, halls and corridors, into areas in which every portal is reachable from every other without obstruction. Zones partition the plan. Every point of the building belongs to exactly one zone, without gaps or overlaps. Every zone has at least one portal.
 
 A zone is marked crossable or not. A non-crossable zone may be a start or a target but is never passed through. Marking further zones non-crossable produces a variant of the routing data, in which those zones may still be reached but not traversed.
 
 ### 1.3
 
-A wall is a boundary between two enclosed spaces in the architectural plan. represented after zoning as one-dimensional (their thickness being neglegted, incorporated into zones). Not crossable.
+A wall is a boundary between two enclosed spaces in the architectural plan. It is represented after zoning as one-dimensional, with its thickness neglected and incorporated into zones. It is not crossable.
 
 ### 1.4
 
@@ -131,4 +131,4 @@ zone₁ portal₁ zone₂ portal₂ zone₃ … portalₙ zoneₙ₊₁
 
 ### 4.17
 
-user's position within a zone is not counted, because the program has no precise positioning due to manual self-location.
+A user's position within a zone is not counted, because the program has no precise positioning due to manual self-location.

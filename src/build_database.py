@@ -247,8 +247,17 @@ def validate_source(
             raise ValueError(f"Wall {wall_id} must separate two distinct rooms")
         if not set(wall["rooms"]).issubset(rooms):
             raise ValueError(f"Wall {wall_id} references an unknown room")
-        if wall["portal_id"] is not None and wall["portal_id"] not in portals:
+        if wall["portal_id"] is None:
+            continue
+        if wall["portal_id"] not in portals:
             raise ValueError(f"Wall {wall_id} references an unknown portal")
+
+        portal_zones = set(portals[wall["portal_id"]]["zones"])
+        room_zone_sets = [set(rooms[room_id]["zone_ids"]) for room_id in wall["rooms"]]
+        if not portal_zones.issubset(room_zone_sets[0] | room_zone_sets[1]) or any(
+            not portal_zones.intersection(zone_ids) for zone_ids in room_zone_sets
+        ):
+            raise ValueError(f"Wall {wall_id} portal does not match wall rooms")
 
 
 def build_database() -> dict[str, Any]:
