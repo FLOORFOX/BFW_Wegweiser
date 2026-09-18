@@ -102,6 +102,21 @@ h2 {
     font-size: clamp(1.8rem, 5vw, 3rem);
 }
 
+.east-wing-link {
+    display: inline-block;
+    margin-top: 8px;
+    color: #28624d;
+    font-family: "Trebuchet MS", sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.east-wing-link:hover {
+    color: var(--accent-dark);
+    text-decoration: underline;
+}
+
 .map-status {
     padding: 7px 10px;
     border: 1px solid #b8d2c7;
