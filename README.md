@@ -9,6 +9,9 @@ The repository adopts a two-tier architecture separating data preparation from p
 - [src/](src/): Python graph compiler defining coordinates, weights, and precomputing route data.
 - [web/](web/): Static client displaying the floor plan and rendering route overlays in the browser.
 
+active app:
+https://floorfox.github.io/BFW_Wegweiser/web/east_wing.html
+
 ## Requirements
 
 - **Python 3.12+** (standard library only; no external packages required)
