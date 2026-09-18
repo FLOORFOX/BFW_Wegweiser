@@ -202,6 +202,23 @@ def validate_routes(database: dict[str, Any]) -> None:
         if set(targets) != zone_ids:
             raise ValueError(f"Route targets are incomplete for {start_zone}")
         for target_zone, route in targets.items():
+            if route["status"] == "unreachable":
+                if (
+                    route["sequence"]
+                    or route["portal_chain"]
+                    or route["zone_sequence"]
+                    or route["state_chain"]
+                    or route["segment_ids"]
+                    or route["segment_zones"]
+                    or route["segment_roles"]
+                    or route["distance"] is not None
+                    or route["special_cost"] is not None
+                    or route["total_cost"] is not None
+                ):
+                    raise ValueError(
+                        f"Unreachable route must use the empty contract: {start_zone} -> {target_zone}"
+                    )
+                continue
             if route["status"] != "ok":
                 raise ValueError(f"Prototype route is unreachable: {start_zone} -> {target_zone}")
             sequence = route["sequence"]

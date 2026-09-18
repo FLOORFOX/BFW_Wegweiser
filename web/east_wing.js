@@ -54,7 +54,10 @@ async function loadPrototype() {
     try {
         const [dataResponse, svgResponse] = await Promise.all([fetch(DATA_URL), fetch(SVG_URL)]);
         if (!dataResponse.ok || !svgResponse.ok) {
-            throw new Error(`Daten ${dataResponse.status}, SVG ${svgResponse.status}`);
+            const failedResources = [];
+            if (!dataResponse.ok) failedResources.push(`Routendaten (${dataResponse.status})`);
+            if (!svgResponse.ok) failedResources.push(`Grundriss-SVG (${svgResponse.status})`);
+            throw new Error(`${failedResources.join(" und ")} konnten nicht geladen werden.`);
         }
         database = await dataResponse.json();
         floorPlan.innerHTML = await svgResponse.text();
@@ -69,7 +72,9 @@ async function loadPrototype() {
         modelStatus.textContent = "Prototypdaten konnten nicht geladen werden";
         modelStatus.setAttribute("data-error", "true");
         emptyState.hidden = false;
-        emptyState.textContent = "Die Seite muss über den lokalen Projektserver geöffnet werden.";
+        emptyState.textContent = error instanceof Error
+            ? `Fehler beim Laden der Prototypdaten: ${error.message}`
+            : "Fehler beim Laden der Prototypdaten.";
         console.error("East-wing prototype failed to load:", error);
     }
 }

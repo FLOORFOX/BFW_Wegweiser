@@ -60,6 +60,24 @@ class EastWingDatabaseTests(unittest.TestCase):
                 self.database["indexes"]["zone_portals"],
             )
 
+    def test_validate_routes_allows_unreachable_contract(self):
+        routed_database = self.calculate_routes.calculate_all_routes(self.database)
+        routed_database["routes"]["E.61"]["E.57"] = {
+            "status": "unreachable",
+            "sequence": [],
+            "portal_chain": [],
+            "zone_sequence": [],
+            "state_chain": [],
+            "segment_ids": [],
+            "segment_zones": [],
+            "segment_roles": [],
+            "distance": None,
+            "special_cost": None,
+            "total_cost": None,
+        }
+
+        self.calculate_routes.validate_routes(routed_database)
+
 
 if __name__ == "__main__":
     unittest.main()
