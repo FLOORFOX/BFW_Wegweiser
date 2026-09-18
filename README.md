@@ -2,6 +2,10 @@
 
 Indoor navigation system prototype designed to assist routing within the BFW facility.
 
+## Homepage
+
+- [Open East Wing Viewer](https://floorfox.github.io/BFW_Wegweiser/web/east_wing.html)
+
 ## Architecture
 
 The repository adopts a two-tier architecture separating data preparation from presentation:
