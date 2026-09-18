@@ -220,7 +220,7 @@ def validate_routes(database: dict[str, Any]) -> None:
                     )
                 continue
             if route["status"] != "ok":
-                raise ValueError(f"Prototype route is unreachable: {start_zone} -> {target_zone}")
+                raise ValueError(f"Invalid route status: {start_zone} -> {target_zone}")
             sequence = route["sequence"]
             if not sequence or sequence[0] != start_zone or sequence[-1] != target_zone:
                 raise ValueError(f"Invalid route endpoints: {start_zone} -> {target_zone}")

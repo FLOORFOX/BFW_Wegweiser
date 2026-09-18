@@ -29,6 +29,16 @@ function clearRenderedRoute() {
     });
 }
 
+function showEmptyRouteState(message) {
+    clearRenderedRoute();
+    instructionList.replaceChildren();
+    routeSummary.hidden = true;
+    canonicalRoute.textContent = "";
+    stateChain.replaceChildren();
+    emptyState.hidden = false;
+    emptyState.textContent = message;
+}
+
 function zoneLabel(zoneId) {
     const zone = database.zones[zoneId];
     return zone.label === zoneId ? zoneId : `${zoneId} · ${zone.label}`;
@@ -71,10 +81,11 @@ async function loadPrototype() {
     } catch (error) {
         modelStatus.textContent = "Prototypdaten konnten nicht geladen werden";
         modelStatus.setAttribute("data-error", "true");
-        emptyState.hidden = false;
-        emptyState.textContent = error instanceof Error
-            ? `Fehler beim Laden der Prototypdaten: ${error.message}`
-            : "Fehler beim Laden der Prototypdaten.";
+        showEmptyRouteState(
+            error instanceof Error
+                ? `Fehler beim Laden der Prototypdaten: ${error.message}`
+                : "Fehler beim Laden der Prototypdaten."
+        );
         console.error("East-wing prototype failed to load:", error);
     }
 }
@@ -184,11 +195,7 @@ function renderSelectedRoute() {
     const targetZone = targetSelect.value;
     const route = database.routes[startZone]?.[targetZone];
     if (!route || route.status !== "ok") {
-        clearRenderedRoute();
-        emptyState.hidden = false;
-        emptyState.textContent = "Für dieses Zonenpaar wurde keine Route gefunden.";
-        instructionList.replaceChildren();
-        routeSummary.hidden = true;
+        showEmptyRouteState("Für dieses Zonenpaar wurde keine Route gefunden.");
         return;
     }
     drawRoute(route, startZone, targetZone);
